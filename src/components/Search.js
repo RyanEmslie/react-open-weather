@@ -11,6 +11,7 @@ export class Search extends Component {
 
   onSubmit = e => {
     e.preventDefault();
+    this.props.searchZip(this.state.zipCode);
   };
 
   render() {
