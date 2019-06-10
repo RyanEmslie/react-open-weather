@@ -1,25 +1,31 @@
 import React, { Component } from "react";
-import Navbar from "./components/Navbar";
-import Search from "./components/Search";
+import Navbar from "./components/layout/Navbar";
+import Search from "./components/layout/Search";
+import Alert from "./components/layout/Alert";
+import City from "./components/CityItem";
 import "./App.css";
-
-//! NEED TO BRING OVER ENV VARIABLE
-const API_KEY = "715b053fa54036e6f3672af97d9be80d";
 
 class App extends Component {
   state = {
     zipData: [],
-    loading: false
+    loading: false,
+    alert: false
   };
 
   searchZip = async zipCode => {
-    console.log(process.env.REACT_OPEN_WEATHER_API_KEY);
+    this.setState({ alert: false });
     const res = await fetch(
-      `http://api.openweathermap.org/data/2.5/weather?zip=32605,us&appid=${API_KEY}`
+      `http://api.openweathermap.org/data/2.5/weather?zip=${zipCode},us&appid=${
+        process.env.REACT_APP_OPEN_WEATHER_API_KEY
+      }`
     );
     const json = await res.json();
-    this.setState({ zipData: json });
-    console.log(this.state.zipData);
+    if (json.cod !== 200) {
+      this.setState({ alert: true });
+    } else {
+      this.setState({ zipData: json });
+      this.setState({ loading: true });
+    }
   };
 
   render() {
@@ -27,6 +33,8 @@ class App extends Component {
       <div className="container">
         <Navbar icon="fas fa-cloud-sun" title="  React Open Weather API" />
         <Search searchZip={this.searchZip} />
+        {this.state.alert && <Alert />}
+        {this.state.loading && <City zipData={this.state.zipData} />}
       </div>
     );
   }

@@ -21,12 +21,12 @@ export class Search extends Component {
           <input
             type="text"
             onChange={this.onChange}
-            placeholder="Please Enter US Zipcode..."
+            placeholder="Please Enter US a 5-digit ZIP code..."
             value={this.state.zipCode}
           />
           <input
             type="submit"
-            className="btn btn-success btn-block"
+            className="btn bg-secondary btn-block"
             value="Search"
           />
         </form>
