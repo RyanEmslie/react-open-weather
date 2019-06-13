@@ -11,13 +11,13 @@ export class Search extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    this.props.searchZip(this.state.zipCode);
+    this.props.getLocation(this.state.zipCode);
   };
 
   render() {
     return (
       <div>
-        <form className="form" onSubmit={this.onSubmit}>
+        <form className="form grid-2" onSubmit={this.onSubmit}>
           <input
             type="text"
             onChange={this.onChange}
@@ -26,7 +26,7 @@ export class Search extends Component {
           />
           <input
             type="submit"
-            className="btn bg-secondary btn-block"
+            className="btn bg-success btn-block"
             value="Search"
           />
         </form>

@@ -22,6 +22,7 @@ body {
   line-height: 1.6;
   background-color: #fff;
   color: #333;
+  background-image: url("./topography.svg");
 }
 
 a {
@@ -115,6 +116,11 @@ img {
   padding: 1rem;
   border: #ccc 1px dotted;
   margin: 0.7rem 0;
+  background-color: #fff;
+}
+
+.sub-container {
+  background-color: #57a9e3;
 }
 
 /* List */
@@ -200,6 +206,12 @@ img {
 .grid-5 {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
+  grid-gap: 1rem;
+}
+
+.grid-7 {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
   grid-gap: 1rem;
 }
 
@@ -400,7 +412,8 @@ table th {
   .grid-2,
   .grid-3,
   .grid-4,
-  .grid-5 {
+  .grid-5,
+  .grid-7 {
     grid-template-columns: 1fr;
   }
 

@@ -1,48 +1,64 @@
 import React, { Component } from "react";
+import Forecast from "./Forecast";
 
 export class City extends Component {
   render(props) {
-    console.log(this.props.zipData);
-    const { name } = this.props.zipData;
-    let { temp } = this.props.zipData.main;
-    temp = parseFloat(temp);
+    const {
+      temperature,
+      startTime,
+      shortForecast,
+      detailedForecast,
+      icon,
+      windSpeed,
+      windDirection
+    } = this.props.forecastData.properties.periods[0];
+    const {
+      city,
+      state
+    } = this.props.locationData.properties.relativeLocation.properties;
+
     return (
-      <div>
-        <div className="container card">
-          <nav className="navbar bg-primary">Location Information</nav>
-          <p>City: {name}</p>
-          <p>Temp: {(((temp - 273.15) * 9) / 5 + 32).toFixed(1)}</p>
+      <>
+        <div>
+          <nav className="navbar bg-primary all-center">
+            {city}, {state}
+          </nav>
         </div>
-        <div className="container card">
-          <nav className="navbar bg-primary">Location Information</nav>
-          <p>City: {name}</p>
-          <p>Temp: {(((temp - 273.15) * 9) / 5 + 32).toFixed(1)}</p>
-        </div>
-        <div className="grid-2">
-          <div className="container card">
-            <nav className="navbar bg-primary">Grid 1 Information</nav>
-            <p>City: {name}</p>
-            <p>Temp: {(((temp - 273.15) * 9) / 5 + 32).toFixed(1)}</p>
+        <div>
+          <div
+            id="current-weather"
+            className="container card grid-2 sub-container"
+          >
+            <div className="card text-center">
+              <p>{startTime}</p>
+              <p>{temperature} F</p>
+              <p>{shortForecast}</p>
+              <img src={icon} alt="" style={{ width: "200px" }} />
+              <p>{detailedForecast}</p>
+            </div>
+            <div className="card text-center">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Weather Data</th>
+                  </tr>
+                </thead>
+                <tbody colSpan="2">
+                  <tr>
+                    <td>Sunset:</td>
+                  </tr>
+                  <tr>
+                    <td>Sunrise:</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
-          <p className="container card">
-            <nav className="navbar bg-primary">Grid 2 Information</nav>
-            <p>City: {name}</p>
-            <p>Temp: {(((temp - 273.15) * 9) / 5 + 32).toFixed(1)}</p>
-          </p>
         </div>
-        <div className="grid-5">
-          <nav className="navbar bg-primary">1</nav>
-          <nav className="navbar bg-primary">2</nav>
-          <nav className="navbar bg-primary">3</nav>
-          <nav className="navbar bg-primary">4</nav>
-          <nav className="navbar bg-primary">5</nav>
+        <div className="grid-7 container card sub-container">
+          <Forecast forecastData={this.props.forecastData} />
         </div>
-        <div className="container card">
-          <nav className="navbar bg-primary">Location Information</nav>
-          <p>City: {name}</p>
-          <p>Temp: {(((temp - 273.15) * 9) / 5 + 32).toFixed(1)}</p>
-        </div>
-      </div>
+      </>
     );
   }
 }
